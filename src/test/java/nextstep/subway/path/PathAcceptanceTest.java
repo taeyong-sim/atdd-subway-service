@@ -78,6 +78,8 @@ public class PathAcceptanceTest extends AcceptanceTest {
      *
      * When 두 역 사이의 최단 경로 탐색 요청
      * Then 최단 경로 조회됨
+     * And 총 거리도 함께 응답함
+     * And 지하철 이용 요금도 함께 응답함
      *
      */
     @Test
@@ -88,6 +90,8 @@ public class PathAcceptanceTest extends AcceptanceTest {
 
         // then
         최단_경로_조회_확인(지하철_경로_조회_요청_결과, 12, Arrays.asList(강남역, 양재역, 남부터미널역));
+        최단_경로_거리_조회됨(지하철_경로_조회_요청_결과, 12);
+        최단_경로_요금_조회됨(지하철_경로_조회_요청_결과, 1350);
     }
 
     /**
@@ -155,5 +159,15 @@ public class PathAcceptanceTest extends AcceptanceTest {
             () -> assertThat(pathResponse.getDistance()).isEqualTo(distance),
             () -> assertThat(stationIds).containsExactlyElementsOf(expectedStationIds)
         );
+    }
+
+    private void 최단_경로_거리_조회됨(ExtractableResponse<Response> response, int distance) {
+        PathResponse pathResponse = response.as(PathResponse.class);
+        assertThat(pathResponse.getDistance()).isEqualTo(distance);
+    }
+
+    private void 최단_경로_요금_조회됨(ExtractableResponse<Response> response, int fare) {
+        PathResponse pathResponse = response.as(PathResponse.class);
+        assertThat(pathResponse.getFare()).isEqualTo(fare);
     }
 }
