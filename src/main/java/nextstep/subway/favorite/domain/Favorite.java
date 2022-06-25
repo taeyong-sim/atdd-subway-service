@@ -35,14 +35,14 @@ public class Favorite extends BaseEntity {
     protected Favorite() {
     }
 
-    public Favorite(Member member, Station source, Station target) {
+    private Favorite(Member member, Station source, Station target) {
+        validateSourceAndTarget(source, target);
         this.member = member;
         this.source = source;
         this.target = target;
     }
 
     public static Favorite of(Member member, Station sourceStation, Station targetStation) {
-        validateSourceAndTarget(sourceStation, targetStation);
         return new Favorite(member, sourceStation, targetStation);
     }
 

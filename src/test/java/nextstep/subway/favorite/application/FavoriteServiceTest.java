@@ -59,7 +59,7 @@ public class FavoriteServiceTest {
         source = new Station("강남역");
         target = new Station("남부터미널역");
         favoriteId = 1L;
-        favorite = new Favorite(member, source, target);
+        favorite = Favorite.of(member, source, target);
     }
 
     @Test
