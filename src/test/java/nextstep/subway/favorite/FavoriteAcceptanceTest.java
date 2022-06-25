@@ -1,36 +1,29 @@
 package nextstep.subway.favorite;
 
-import static nextstep.subway.auth.acceptance.AuthAcceptanceTest.로그인_되어_있음;
-import static nextstep.subway.auth.acceptance.AuthAcceptanceTest.로그인_요청;
 import static nextstep.subway.line.acceptance.LineAcceptanceTest.지하철_노선_등록되어_있음;
 import static nextstep.subway.line.acceptance.LineSectionAcceptanceTest.지하철_노선에_지하철역_등록_요청;
 import static nextstep.subway.member.MemberAcceptanceTest.AGE;
 import static nextstep.subway.member.MemberAcceptanceTest.EMAIL;
 import static nextstep.subway.member.MemberAcceptanceTest.PASSWORD;
-import static nextstep.subway.member.MemberAcceptanceTest.회원_생성을_요청;
-import static nextstep.subway.station.StationAcceptanceTest.지하철역_등록되어_있음;
+import static nextstep.subway.utils.AcceptanceTestHelper.로그인_되어_있음;
 import static nextstep.subway.utils.RestAssuredRequest.deleteWithOAuth;
 import static nextstep.subway.utils.RestAssuredRequest.getWithOAuth;
 import static nextstep.subway.utils.RestAssuredRequest.postWithOAuth;
+import static nextstep.subway.utils.RestAssuredRequest.회원_생성을_요청;
 import static org.assertj.core.api.Assertions.assertThat;
 
-import io.restassured.RestAssured;
 import io.restassured.response.ExtractableResponse;
 import io.restassured.response.Response;
 import java.util.Arrays;
 import java.util.List;
-import java.util.Objects;
 import java.util.stream.Collectors;
 import nextstep.subway.AcceptanceTest;
-import nextstep.subway.auth.dto.TokenResponse;
 import nextstep.subway.favorite.dto.FavoriteRequest;
 import nextstep.subway.favorite.dto.FavoriteResponse;
-import nextstep.subway.line.acceptance.LineAcceptanceTest;
 import nextstep.subway.line.dto.LineRequest;
 import nextstep.subway.line.dto.LineResponse;
 import nextstep.subway.station.StationAcceptanceTest;
 import nextstep.subway.station.dto.StationResponse;
-import nextstep.subway.utils.RestAssuredRequest;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;

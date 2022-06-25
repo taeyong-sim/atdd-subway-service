@@ -11,7 +11,6 @@ import static org.junit.jupiter.api.Assertions.assertAll;
 import io.restassured.response.ExtractableResponse;
 import io.restassured.response.Response;
 import nextstep.subway.AcceptanceTest;
-import nextstep.subway.auth.dto.TokenRequest;
 import nextstep.subway.auth.dto.TokenResponse;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
@@ -104,23 +103,11 @@ public class AuthAcceptanceTest extends AcceptanceTest {
         회원정보_조회_실패(findResponse);
     }
 
-    public static ExtractableResponse<Response> 로그인_요청(String email, String password) {
-        TokenRequest tokenRequest = new TokenRequest(email, password);
-
-        return post("/login/token", tokenRequest);
-    }
-
     private static void 로그인_성공(ExtractableResponse<Response> response) {
         assertAll(
             () -> assertThat(response.statusCode()).isEqualTo(HttpStatus.OK.value()),
             () -> assertThat(response.as(TokenResponse.class)).isNotNull()
         );
-    }
-
-    public static String 로그인_되어_있음(String email, String password) {
-        TokenResponse tokenResponse = 로그인_요청(email, password).as(TokenResponse.class);
-
-        return tokenResponse.getAccessToken();
     }
 
     private static void 로그인_실패(ExtractableResponse<Response> response) {
